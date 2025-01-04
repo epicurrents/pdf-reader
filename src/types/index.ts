@@ -14,6 +14,12 @@ export type ConfigReadFile = {
     url?: string
 }
 
+export type PdfSourceContext = {
+    file: File | null
+    part: number
+    url: string | null
+}
+
 export interface PdfFileReader extends FileFormatReader {
 
 }

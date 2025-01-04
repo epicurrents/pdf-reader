@@ -11,6 +11,7 @@ import {
     type StudyContextFile,
     type StudyFileContext,
 } from '@epicurrents/core/dist/types'
+import PdfWorkerSubstitute from './pdf/PdfWorkerSubstitute'
 import { type ConfigReadFile, type PdfFileReader } from '#types'
 import Log from 'scoped-event-log'
 
@@ -18,7 +19,8 @@ const SCOPE = 'PdfReader'
 
 export default class PdfReader extends GenericFileReader implements PdfFileReader {
 
-    constructor () {
+    constructor (source: string) {
+        PdfWorkerSubstitute.source = source
         const fileTypeAssocs = [
             {
                 accept: {
@@ -31,7 +33,10 @@ export default class PdfReader extends GenericFileReader implements PdfFileReade
     }
 
     getFileTypeWorker (): Worker | null {
-        return null
+        const workerOverride = this._workerOverride.get('pdf')
+        const worker = workerOverride ? workerOverride() : new PdfWorkerSubstitute()
+        Log.registerWorker(worker)
+        return worker
     }
 
     async readFile (source: File | StudyFileContext, config?: ConfigReadFile) {
