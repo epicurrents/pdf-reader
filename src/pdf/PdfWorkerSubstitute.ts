@@ -143,7 +143,14 @@ export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute {
                 return
             }
             try {
+                // TODO: Support multiple sources as parts of a presentation.
                 this._pdf = await pdfjsLib.getDocument(data.sources[0].url).promise
+                this.returnMessage({
+                    action,
+                    numPages: this._pdf.numPages,
+                    success: true,
+                    rn: message.rn,
+                })
             } catch (e) {
                 Log.error(`An error occurred while trying to set sources.`, SCOPE, e as Error)
                 this.returnMessage({
