@@ -51,7 +51,7 @@ export default class PdfReader extends GenericFileReader implements PdfFileReade
             partial: false,
             range: [],
             role: 'data',
-            type: PdfReader.CONTEXTS.DOCUMENT,
+            modality: 'document',
             url: config?.url || URL.createObjectURL(file),
         } as StudyContextFile
         this._study.files.push(studyFile)
@@ -70,7 +70,7 @@ export default class PdfReader extends GenericFileReader implements PdfFileReade
             partial: false,
             range: [],
             role: 'data',
-            type: PdfReader.CONTEXTS.DOCUMENT,
+            modality: 'document',
             url: url,
         } as StudyContextFile
         this._study.files.push(studyFile)
