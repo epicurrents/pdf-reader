@@ -45,7 +45,7 @@
   "author": "Sampsa Lohi",
   "license": "Apache-2.0",
   "dependencies": {
-    "@epicurrents/core": "^0.2.0-1",
+    "@epicurrents/core": "^0.3.0-2",
     "pdfjs-dist": "^4.9.155",
     "scoped-event-log": "^2.0.0"
   },
