@@ -10,7 +10,7 @@ module.exports = {
     mode: 'production',
     entry: {
         'pdf-reader': { import: path.join(__dirname, 'src', 'index.ts') },
-        'pdfjs-worker': { import: path.join(MODULE_PATH, 'pdfjs-dist', 'build', 'pdf.worker.mjs') },
+        'pdfjs.worker': { import: path.join(MODULE_PATH, 'pdfjs-dist', 'build', 'pdf.worker.mjs') },
     },
     module: {
         rules: [
