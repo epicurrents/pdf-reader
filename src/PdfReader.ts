@@ -33,7 +33,7 @@ export default class PdfReader extends GenericFileReader implements PdfFileReade
     }
 
     getFileTypeWorker (): Worker | null {
-        const workerOverride = this._workerOverride.get('pdf')
+        const workerOverride = this._workerOverrides.get('pdf')
         const worker = workerOverride ? workerOverride() : new PdfWorkerSubstitute()
         Log.registerWorker(worker)
         return worker
