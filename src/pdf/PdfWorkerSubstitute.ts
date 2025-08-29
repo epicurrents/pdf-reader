@@ -9,13 +9,13 @@ import * as pdfjsLib from 'pdfjs-dist'
 import { TextItem } from 'pdfjs-dist/types/src/display/api'
 import { ServiceWorkerSubstitute } from '@epicurrents/core'
 import { validateCommissionProps } from '@epicurrents/core/dist/util'
-import { type WorkerMessage } from '@epicurrents/core/dist/types'
+import type { WorkerSubstitute, WorkerMessage } from '@epicurrents/core/dist/types'
 import { type PdfSourceContext } from '#types'
 import { Log } from 'scoped-event-log'
 
 const SCOPE = 'PdfWorkerSubstitute'
 
-export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute {
+export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute implements WorkerSubstitute {
     /**
      * Set the source URL for the PDF.js worker.
      * @param source - The source of the PDF worker.
@@ -60,7 +60,7 @@ export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute {
             const data = validateCommissionProps(
                 message as WorkerMessage['data'] & { pageNum: number },
                 {
-                    pageNum: ['Number', 'undefined'],
+                    pageNum: 'Number?',
                 },
                 this._pdf !== null
             )
@@ -94,7 +94,7 @@ export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute {
             const data = validateCommissionProps(
                 message as WorkerMessage['data'] & { pageNum: number },
                 {
-                    pageNum: ['Number', 'undefined'],
+                    pageNum: 'Number?',
                 },
                 this._pdf !== null
             )
@@ -160,7 +160,7 @@ export default class PdfWorkerSubstitute extends ServiceWorkerSubstitute {
                 })
             }
         } else {
-            super.postMessage(message)
+            return super.postMessage(message)
         }
     }
 }
