@@ -1,7 +1,7 @@
-import PdfReader from './PdfReader'
+import PdfImporter from './PdfImporter'
 import PdfWorkerSubstitute from './pdf/PdfWorkerSubstitute'
 
 export {
-    PdfReader,
+    PdfImporter,
     PdfWorkerSubstitute,
 }
