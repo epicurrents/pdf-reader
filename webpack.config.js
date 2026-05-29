@@ -3,8 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 require('dotenv').config()
 
 const ASSET_PATH = process.env.ASSET_PATH || '/pdf-reader/'
-// In a workspace setup, the env value must point to the workspace node_modules folder.
-const MODULE_PATH = process.env.MODULE_PATH || path.join(__dirname, 'node_modules')
+// pdfjs-dist is hoisted to the workspace root node_modules; resolve upward by default.
+// Override via MODULE_PATH env var when building pdf-reader standalone.
+const MODULE_PATH = process.env.MODULE_PATH || path.resolve(__dirname, '../../node_modules')
 
 module.exports = {
     mode: 'production',
@@ -16,7 +17,14 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
+                use: {
+                    loader: 'ts-loader',
+                    options: {
+                        // Suppress declaration-file emit during the webpack pass.
+                        // Full type-checking and .d.ts generation are handled by build:tsc.
+                        transpileOnly: true,
+                    },
+                },
                 exclude: '/node_modules/',
             },
         ],
@@ -41,6 +49,8 @@ module.exports = {
             '#types': path.resolve(__dirname, 'src', 'types'),
             '#workers': path.resolve(__dirname, 'src', 'workers'),
         },
+        // Must remain false: the pdfjs.worker entry uses an absolute MODULE_PATH that
+        // webpack doubles when symlinks are followed for workspace-symlinked dependencies.
         symlinks: false
     },
 }
