@@ -41,7 +41,7 @@ export default class PdfImporter extends GenericStudyImporter implements PdfFile
 
     async importFile (source: File | StudyFileContext, config?: ConfigReadFile) {
         const file = (source as StudyFileContext).file || source as File
-        Log.debug(`Loading PDF from file ${file.webkitRelativePath}.`, SCOPE)
+        Log.debug(`Loading PDF from file ${file.webkitRelativePath || file.name}.`, SCOPE)
         const fileName = config?.name || file.name || ''
         const studyFile = {
             file: file,
