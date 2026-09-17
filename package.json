@@ -5,11 +5,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run build:umd && npm run build:tsc",
-    "build:assets": "webpack --progress --stats-error-details --config webpack.assets.js",
-    "build:tsc": "tsc && tsconfig-replace-paths --project tsconfig.paths.json",
-    "build:umd": "webpack --progress --config webpack.config.js",
-    "dev": "webpack serve --progress --config webpack.dev.js",
+    "build": "npm run build:workers && npm run build:tsc",
+    "build:lib": "vite build",
+    "build:tsc": "npm run build:lib && npm run build:types",
+    "build:types": "epicurrents-build-types",
+    "build:workers": "node scripts/build-workers.mjs",
     "lint": "npm run lint:src",
     "lint:src": "eslint src",
     "prepack": "npm run build",
@@ -29,13 +29,9 @@
     "./dist/types": "./dist/types/index.d.ts",
     "./umd/*": "./umd/*"
   },
-  "imports": {
-    "#*": "./dist/*"
-  },
   "files": [
     "dist/*",
     "umd/*js",
-    "umd/*.LICENSE.txt",
     "LICENSE",
     "README.md"
   ],
@@ -52,18 +48,13 @@
     "@epicurrents/core": "^1.0.0",
     "@eslint/js": "^9.17.0",
     "@microsoft/tsdoc": "^0.14.1",
-    "circular-dependency-plugin": "^5.2.2",
-    "dotenv": "^16.3.2",
+    "esbuild": "^0.28.2",
     "eslint": "^9.17.0",
     "scoped-event-log": "^3.2.0",
-    "ts-loader": "^9.5.1",
-    "tsconfig-replace-paths": "^0.0.14",
     "typedoc": "^0.27.6",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.19.0",
-    "webpack": "^5.73.0",
-    "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-cli": "^4.9.2"
+    "vite": "^7.3.1"
   },
   "peerDependencies": {
     "@epicurrents/core": "^1.0.0",
