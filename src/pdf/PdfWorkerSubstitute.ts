@@ -8,8 +8,8 @@
 import * as pdfjsLib from 'pdfjs-dist'
 import { TextItem } from 'pdfjs-dist/types/src/display/api'
 import { ServiceWorkerSubstitute } from '@epicurrents/core'
-import { validateCommissionProps } from '@epicurrents/core/dist/util'
-import type { WorkerSubstitute, WorkerMessage } from '@epicurrents/core/dist/types'
+import { validateCommissionProps } from '@epicurrents/core/util'
+import type { WorkerSubstitute, WorkerMessage } from '@epicurrents/core/types'
 import { type PdfSourceContext } from '#types'
 import { Log } from 'scoped-event-log'
 

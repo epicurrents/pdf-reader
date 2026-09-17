@@ -10,7 +10,7 @@ import type {
     AssociatedFileType,
     StudyContextFile,
     StudyFileContext,
-} from '@epicurrents/core/dist/types'
+} from '@epicurrents/core/types'
 import PdfWorkerSubstitute from './pdf/PdfWorkerSubstitute'
 import type { ConfigReadFile, PdfFileImporter } from '#types'
 import Log from 'scoped-event-log'
