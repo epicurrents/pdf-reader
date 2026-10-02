@@ -1,0 +1,14 @@
+{
+    // The suite is type-checked as a step of `npm test`, ahead of the unit run. The reader itself is
+    // constructed for real; only pdf.js is replaced, through a factory the test file supplies, so
+    // this is what catches a double drifting from the shape pdf.js actually hands back.
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "rootDir": ".",
+        "types": ["node"],
+        "typeRoots": ["../../node_modules/@types", "./node_modules/@types"]
+    },
+    "include": ["./tests/**/*", "./src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
